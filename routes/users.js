@@ -39,18 +39,8 @@ router.get('/:user_id/tasks/:task_id/destroy', function (req, res) {
   });
 });
 
-router.get('/', function (req, res) {
-  models.User
-    .findAll()
-    .then(users => {
-      res.render('users/index.pug', {
-        title: 'Users',
-        users: users
-      });
-    });
-});
-
-router.get('/:user_id', function (req, res, next) {
+router.get('/:user_id/edit', function (req, res, next) {
+  console.log('a');
   models.User.findOne({
     include: [ models.Task ],
     where: {
@@ -58,10 +48,24 @@ router.get('/:user_id', function (req, res, next) {
     }
   }).then(user => {
     if (!user) return notFound('User', next);
-
-    res.render('users/show.pug', {
+    res.render('users/edit.ejs', {
       user: user
     });
+  });
+});
+
+router.post('/', function (req, res, next) {
+  models.User.findOne({
+    include: [ models.Task ],
+    where: {
+      id: req.body['id']
+    }
+  }).then(user => {
+    if (!user) return notFound('User', next);
+    console.log(req.body['username']);
+
+    user.updateAttributes({ username: req.body['username'] });
+    res.redirect('/');
   });
 });
 

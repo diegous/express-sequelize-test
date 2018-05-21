@@ -1,0 +1,8 @@
+<h1><%= user.username %></h1>
+<form action="<%= "/users/"  %>" method="POST" class="form-inline">
+  <div class="form-group">
+    <input type="text" name="username" value="<%= user.username %>" class="input-sm form-control">
+    <input type="hidden" name="id" value="<%= user.id %>">
+    <input type="submit" class="btn btn-sm btn-default">
+  </div>
+</form>

@@ -1,0 +1,40 @@
+<div class="col-md-4">
+  <h2>Create user</h2>
+  <form action="/users/create" method="POST" class="well">
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" name="username" class="form-control">
+      <input type="submit" class="btn btn-default">
+    </div>
+  </form>
+</div>
+
+<div class="col-md-6">
+  <h2>Users</h2>
+  <ul>
+    <% for (let user of users) { %>
+      <li>
+        <strong><%= user.username %></strong>
+        <a href="<%=  "/users/" + user.id + "/edit" %>" class="btn btn-xs">Edit</a>
+        <a href="<%=  "/users/" + user.id + "/destroy" %>" class="btn btn-xs btn-warning">Delete</a>
+        <ul>
+          <li>
+            Create task
+            <form action="<%= "/users/" + user.id + "/tasks/create" %>" method="POST" class="form-inline">
+              <div class="form-group">
+                <input type="text" name="title" class="input-sm form-control">
+                <input type="submit" class="btn btn-sm btn-default">
+              </div>
+            </form>
+          </li>
+          <% for (let task of user.Tasks) { %>
+            <li>
+              <%= task.title %>
+              <a href="<%= "/users/" + user.id + "/tasks/" + task.id + "/destroy" %>"  class="btn btn-xs btn-warning">Delete</a>
+            </li>
+          <% } %>
+        </ul>
+      </li>
+    <% } %>
+  </ul>
+</div>
