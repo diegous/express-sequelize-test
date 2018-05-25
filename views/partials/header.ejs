@@ -1,0 +1,23 @@
+<h1>Node Test</h1>
+
+<div>
+  <% if (locals.currentUser) { %>
+    <p>Welcome <%= currentUser.username %></p>
+    <a href="/logout">Logout</a>
+  <% } else { %>
+    <a href="/login">Login</a>
+    <br>
+    <a href="/signup">Signup</a>
+  <% } %>
+</div>
+
+<% if (locals.messages) { %>
+  <div>
+    <strong>Mensajes:</strong>
+    <ul>
+      <% for (let msg of locals.messages) { %>
+        <li><%= msg %>  <%_ msg _%></li>
+      <% } %>
+    </ul>
+  </div>
+<% } %>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title><%= locals.tile || ":)" %></title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/stylesheets/style.css" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <% include partials/header.ejs %>
+    </header>
+
+    <% if (locals.currentUser) { %>
+      <nav>
+        <% include partials/nav.ejs %>
+      </nav>
+    <% } %>
+
+    <%- body %>
+  </body>
+</html>
